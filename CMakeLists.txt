@@ -8,3 +8,4 @@ add_subdirectory(pixgentor)
 
 target_include_directories(pixgentor PUBLIC $(CMAKE_CURRENT_SOURCE_DIR)/thirdparty/glfw/include)
 target_include_directories(pixgentor PUBLIC $(CMAKE_CURRENT_SOURCE_DIR)/thirdparty/glad/include)
+target_include_directories(pixgentor PUBLIC $(CMAKE_CURRENT_SOURCE_DIR)/pixgentor/render)
