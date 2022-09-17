@@ -12,7 +12,11 @@ set(inc
     render_shaders.h
 )
 
-add_library(render render_buffers.c render_shaders.c)
+add_library(render
+    render_buffers.c 
+    render_shaders.c 
+    render_viewport.c
+)
 
 target_include_directories(render PUBLIC render)
 

@@ -5,6 +5,7 @@
 
 #include "render/render_buffers.h"
 #include "render/render_shaders.h"
+#include "render/render_viewport.h"
 
 int main()
 {
@@ -44,6 +45,15 @@ int main()
         0, 1, 2,
         2, 3, 0
     };
+
+    struct gl_viewport viewport = { 
+        .x = 100,
+        .y = 100,
+        .width = 540,
+        .height = 380
+    };
+
+    render_set_viewport(&viewport);
 
     const char *vshader_path = "/pixgentor/render/shaders/shader.vert";
     const char *fshader_path = "/pixgentor/render/shaders/shader.frag";

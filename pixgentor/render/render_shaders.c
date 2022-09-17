@@ -1,6 +1,6 @@
-#include <stdio.h>
-
 #include "render_shaders.h"
+
+#include <stdio.h>
 
 static char *render_parse_shader(const char *shader_path);
 static GLuint render_compile_shader(const char *shader_source, GLenum shader_type);
