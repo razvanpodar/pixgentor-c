@@ -55,8 +55,8 @@ int main()
 
     render_set_viewport(&viewport);
 
-    const char *vshader_path = "/pixgentor/render/shaders/shader.vert";
-    const char *fshader_path = "/pixgentor/render/shaders/shader.frag";
+    const char *vshader_path = "../resources/shaders/shader.vert";
+    const char *fshader_path = "../resources/shaders/shader.frag";
     GLuint shader = render_compile_shaders(vshader_path, fshader_path);
 
     struct gl_buffers rect = render_generate_buffers();

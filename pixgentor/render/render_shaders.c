@@ -1,33 +1,21 @@
 #include "render_shaders.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 
 static char *render_parse_shader(const char *shader_path);
-static GLuint render_compile_shader(const char *shader_source, GLenum shader_type);
+static GLuint render_compile_shader(const char *shader_source,
+                                    GLenum shader_type);
 
 GLuint render_compile_shaders(const char *vshader_path,
-                            const char *fshader_path)
+                              const char *fshader_path)
 {
     GLuint vertex_shader;
     GLuint fragment_shader;
     GLuint shader;
 
-    // char *vshader_source = render_parse_shader(vshader_path);
-    // char *fshader_source = render_parse_shader(fshader_path);
-
-    const char *vshader_source = "#version 330 core\n"
-        "layout (location = 0) in vec3 aPos;\n"
-        "void main()\n"
-        "{\n"
-        "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-        "}\0";
-
-    const char *fshader_source = "#version 330 core\n"
-        "out vec4 FragColor;\n"
-        "void main()\n"
-        "{\n"
-        "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-        "}\n\0";
+    char *vshader_source = render_parse_shader(vshader_path);
+    char *fshader_source = render_parse_shader(fshader_path);
 
     vertex_shader = render_compile_shader(vshader_source, GL_VERTEX_SHADER);
     fragment_shader = render_compile_shader(fshader_source,
@@ -62,7 +50,8 @@ void render_delete_shader(GLuint shader)
     glDeleteProgram(shader);
 }
 
-static GLuint render_compile_shader(const char *shader_source, GLenum shader_type)
+static GLuint render_compile_shader(const char *shader_source,
+                                    GLenum shader_type)
 {
     GLuint shader;
 
@@ -78,7 +67,7 @@ static GLuint render_compile_shader(const char *shader_source, GLenum shader_typ
         printf("ERROR::GL::SHADER::COMPILATION_FAILED\n");
     }
 
-    // free(shader_source);
+    free(shader_source);
 
     return shader;
 }
@@ -91,8 +80,7 @@ static char *render_parse_shader(const char *shader_path)
     if (f == NULL)
     {
         char *s = (char*) malloc(sizeof(char));
-        // *s = 's';
-        // printf("%s\n", *s);
+        *s = 's';
         return s;
     }
 
@@ -100,7 +88,7 @@ static char *render_parse_shader(const char *shader_path)
     int size = ftell(f);
     fseek(f, 0, SEEK_SET);
 
-    char *s = (char) malloc(size + 1);
+    char *s = (char*) malloc(size + 1);
     fread(s, size, 1, f); 
 
     fclose(f);
