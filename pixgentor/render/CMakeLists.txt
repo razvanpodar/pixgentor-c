@@ -4,8 +4,9 @@ add_library(render
     render_buffers.c 
     render_shaders.c 
     render_viewport.c
+    render_texture.c
 )
 
 target_include_directories(render PUBLIC render)
 
-target_link_libraries(render glad)
+target_link_libraries(render glad stb)

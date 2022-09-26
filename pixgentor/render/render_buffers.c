@@ -27,9 +27,16 @@ void render_bind_buffers(struct gl_buffers *buffers,
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, i_size * sizeof(GLuint),
                  indices, GL_STATIC_DRAW);
 
-    glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
-                          sizeof(GL_FLOAT) * 3, (void*)0);
+                          sizeof(GLfloat) * 5, (void*)0);
+    glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE,
+                          sizeof(GLfloat) * 5,
+                          (void*)(3 * sizeof(GLfloat)));
+    glEnableVertexAttribArray(1);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     glBindVertexArray(0);
 }

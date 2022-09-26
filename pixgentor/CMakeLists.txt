@@ -4,4 +4,4 @@ add_subdirectory(render)
 
 add_executable(pixgentor pixgentor.c)
 
-target_link_libraries(pixgentor glfw glad render)
+target_link_libraries(pixgentor glfw glad stb render)
