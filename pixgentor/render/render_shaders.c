@@ -1,9 +1,9 @@
-#include "render_shaders.h"
+#include "pgt/render_shaders.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 
-static GLuint render_compile_shader(const char *shader_source,
+static GLuint render_compile_shader(char *shader_source,
                                     GLenum shader_type)
 {
     GLuint shader;

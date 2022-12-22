@@ -7,6 +7,6 @@ add_library(render
     render_texture.c
 )
 
-target_include_directories(render PUBLIC render)
+target_include_directories(render PUBLIC $(CMAKE_CURRENT_SOURCE_DIR)/include)
 
-target_link_libraries(render glad stb)
+target_link_libraries(render glad stb math)

@@ -4,10 +4,13 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
-#include "render/render_buffers.h"
-#include "render/render_shaders.h"
-#include "render/render_viewport.h"
-#include "render/render_texture.h"
+#include "pgt/render_buffers.h"
+#include "pgt/render_shaders.h"
+#include "pgt/render_viewport.h"
+#include "pgt/render_texture.h"
+
+#define WIDTH 640
+#define HEIGHT 480
 
 int main()
 {
@@ -18,7 +21,7 @@ int main()
         return -1;
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Pixgentor", NULL, NULL);
+    window = glfwCreateWindow(WIDTH, HEIGHT, "Pixgentor", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -33,11 +36,41 @@ int main()
         return -1;
     }
 
+    int x = 100;
+    int y = 100;
+    int width = 100;
+    int height = 100;
+
+    // Pixel coordinates to OpenGL coordinates
+    GLfloat x_gl = ((2.0f * x) / WIDTH) - 1.0f;
+    GLfloat y_gl = ((2.0f * y) / HEIGHT) - 1.0f;
+    GLfloat width_gl = ((2.0f * (x + width)) / WIDTH) - 1.0f;
+    GLfloat height_gl = ((2.0f * (y + height)) / HEIGHT) - 1.0f;
+
+    printf("x_gl = %f\n", x_gl);
+    printf("y_gl = %f\n", y_gl);
+    printf("width_gl = %f\n", width_gl);
+    printf("height_gl = %f\n", height_gl);
+
+    // GLfloat vertices[] = {
+    //      1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
+    //      1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+    //     -1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+    //     -1.0f,  1.0f, 0.0f, 0.0f, 1.0f
+    // };
+
+    // GLfloat vertices[] = {
+    //      0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+    //      0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+    //     -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+    //     -0.5f,  0.5f, 0.0f, 0.0f, 1.0f
+    // };
+
     GLfloat vertices[] = {
-         0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
-         0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
-        -0.5f,  0.5f, 0.0f, 0.0f, 1.0f
+        width_gl, height_gl, 0.0f, 1.0f, 1.0f,
+        width_gl, y_gl, 0.0f, 1.0f, 0.0f,
+        x_gl, y_gl, 0.0f, 0.0f, 0.0f,
+        x_gl, height_gl, 0.0f, 0.0f, 1.0f
     };
 
     GLuint indices[] = {
@@ -51,11 +84,11 @@ int main()
     struct gl_viewport viewport = {
         .x = 100,
         .y = 100,
-        .width = 540,
-        .height = 380
+        .width = 200,
+        .height = 200
     };
 
-    render_set_viewport(&viewport);
+    // render_set_viewport(&viewport);
 
     const char *vshader_path = "../resources/shaders/shader.vert";
     const char *fshader_path = "../resources/shaders/shader.frag";
